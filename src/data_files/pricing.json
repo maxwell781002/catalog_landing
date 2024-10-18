@@ -1,0 +1,75 @@
+{
+  "title": "Precios sencillos y transparentes",
+  "subTitle": "Aumente la eficiencia con los planes claros y orientados al valor de EnElGaraje.",
+  "badge": "Best value",
+  "thirdOption": "Enterprise Solutions?",
+  "btnText": "Planes detallados",
+
+  "starterKit": {
+    "name": "Plan Básico",
+    "description": "El plan ideal para empezar.",
+    "price": "1,000",
+    "cents": ".00",
+    "billingFrequency": "CUP / mes",
+    "features": [
+      "Dominio de la aplicación (ejemplo: tu-tienda.enelgaraje.com)",
+      "Propietario de un solo Negocio EnElGaraje",
+      "Creación de hasta 3 categorías",
+      "Subida de hasta 30 productos",
+      "Acceso a informes de ventas básicos en el Dashboard",
+      "Notificaciones vía Telegram",
+      "Soporte de seguridad y actualizaciones regulares estándar",
+      "Otros"
+    ],
+    "purchaseBtnTitle": "Get the Starter Kit",
+    "purchaseLink": "#"
+  },
+
+  "BussinesPlan": {
+    "name": "Plan Bussines",
+    "description": "Lleva tu negocio al siguiente nivel.",
+    "price": "6,000",
+    "cents": ".00",
+    "billingFrequency": "CUP / mes",
+    "features": [
+      "Dominio propio (ejemplo: tunegocio.com)",
+      "Subida de logotipo del negocio",
+      "Creación de hasta 10 categorías",
+      "Subida de hasta 100 productos",
+      "Posibilidad de crear 15 ofertas/promociones",
+      "Generación de comprobantes de pago y QR para pagos en línea",
+      "Soporte por correo electrónico y chat en vivo",
+      "Acceso a informes de ventas detallados y análisis de tendencias en el Dashboard",
+      "Soporte de seguridad avanzada y actualizaciones prioritarias",
+      "Otros"
+    ],
+    "purchaseBtnTitle": "Get the Starter Kit",
+    "purchaseLink": "#"
+  },
+
+  "professionalToolbox": {
+    "name": "Plan Premium",
+    "description": "Experiencia sin límites para aquellos que buscan lo mejor.",
+    "price": "12,300",
+    "cents": ".00",
+    "billingFrequency": "CUP / mes",
+    "features": [
+      "Propietario de ilimitados Negocios",
+      "Creación de categorías ilimitadas",
+      "Subida de productos ilimitados",
+      "Permitir subir hasta 3 imágenes de cada Producto",
+      "Permitir ampliar las imágenes de Productos (zoom)",
+      "Posibilidad de crear ofertas/promociones ilimitadas",
+      "Contacto por múltiples canales (WhatsApp, Telegram y otros) con ilimitados vendedores",
+      "Notificaciones vía Telegram, WhatsApp y Push al teléfono celular",
+      "Soporte prioritario por correo electrónico, chat en vivo y teléfono",
+      "Acceso a informes de ventas completos, análisis de tendencias y predicciones en el Dashboard",
+      "Integración completa con herramientas de marketing (correo electrónico, redes sociales, etc.)",
+      "Funcionalidades SEO avanzadas y optimización automática",
+      "Acceso a la API para desarrolladores y personalización avanzada",
+      "Otros"
+    ],
+    "purchaseBtnTitle": "Get the Professional Toolbox",
+    "purchaseLink": "#"
+  }
+}

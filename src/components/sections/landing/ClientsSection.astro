@@ -1,0 +1,90 @@
+---
+// Define props from Astro
+const { title, subTitle } = Astro.props;
+import { Image } from "astro:assets";
+import villotalleres from "@images/logotipos/villotalleres.png";
+import heladoMio from "@images/logotipos/helado-mio.png";
+import alvarezautomotriz from "@images/logotipos/alvarezautomotriz.png";
+import ire from "@images/logotipos/ire.jpg";
+import machitos from "@images/logotipos/machitos.png";
+import produccionesgranado from "@images/logotipos/produccionesgranado.png";
+import logo from "@images/logotipos/logo.png";
+
+const clients = [
+  {
+    image: villotalleres,
+    alt: 'Villotalleres',
+    height: 150,
+  },
+  {
+    image: heladoMio,
+    alt: 'Helado mio',
+    height: 100,
+  },
+  {
+    image: alvarezautomotriz,
+    alt: 'Alvarez Automotriz',
+    height: 250,
+  },
+  {
+    image: ire,
+    alt: 'Ire',
+    height: 100,
+  },
+  {
+    image: machitos,
+    alt: 'machitos',
+    height: 100,
+  },
+  {
+    image: produccionesgranado,
+    alt: 'produccionesgranado',
+    height: 100,
+  },
+  {
+    image: logo,
+    alt: 'logo',
+    height: 100,
+  },
+]
+
+// Define TypeScript interface for props
+interface Props {
+  title: string;
+  subTitle?: string;
+}
+---
+
+<section
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+>
+  <!-- Title and description -->
+  <div class="mx-auto mb-6 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
+    <h2
+      class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl"
+    >
+      {title}
+    </h2>
+    {
+      subTitle && (
+        <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
+          {subTitle}
+        </p>
+      )
+    }
+  </div>
+  <div
+    class="flex flex-col flex-wrap items-center justify-center gap-y-2 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-24"
+  >
+    {clients.map(({ image, alt, height }) => (
+      <Image
+        src={image as any}
+        alt={alt as unknown as string}
+        draggable={"false"}
+        format={"avif"}
+        loading={"eager"}
+        height={height}
+      />
+    ))}
+  </div>
+</section>

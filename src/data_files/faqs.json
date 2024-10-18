@@ -1,0 +1,81 @@
+{
+  "subTitle": "Pregúntenos cualquier cosa sobre nuestro proyecto, y obtenga respuestas objetivas.",
+  "faqs": [
+    {
+      "question": "¿Qué es la App EnElGaraje?",
+      "answer": "La App EnElGaraje es una aplicación Web útil para todo aquel Propietario de Negocio en cualquier parte del mundo que desee promocionar y vender sus productos y servicios a través de Internet."
+    },
+    {
+      "question": "¿Cómo puedo crear mi Tienda Online?",
+      "answer": "Para crear tu Tienda Online de tu Negocio, solamente debes acceder desde cualquier navegador al siguiente enlace: https://backoffice.enelgaraje.com/ y autenticándote con cualquier cuenta de Google o red Social aceptada por la Plataforma (ejemplo: Facebook). Luego de autenticarte, tendrás acceso vía WhatsApp desde la misma Plataforma, donde podrás contactar con el Staff de EnElGaraje y solicitarle Crear tu Tienda Online."
+    },
+    {
+      "question": "¿Qué datos tengo que brindar para crear mi Tienda?",
+      "answer": "Con el Nombre del Propietario, Número del Teléfono móvil, Correo electrónico con el que te autenticaste, Nombre y Dirección del Negocio, podremos habilitar de inmediato tu Tienda, y darte todos las credenciales para su Gestión. Deberás firmar Contrato de Aceptación de Políticas a cumplir como Dueño de un Negocio de la App EnElGaraje"
+    },
+    {
+      "question": "¿Puede acceder todo el mundo a mi Tienda?",
+      "answer": "Sí, desde cualquier parte del mundo se podrá acceder a tu Tienda Online y solicitar productos que comercializas por esa vía, solamente deberías dar a conocer el enlace, por ejemplo: tu-tienda.enelgaraje.com."
+    },
+    {
+      "question": "Cómo me contacta un Cliente que Solicite productos de mi Tienda",
+      "answer": "El Cliente, una vez en tu Tienda, podrá contactarte vía WhatsApp ó Telegram por tu número de teléfono móvil, según lo hayas configurado en tu Negocio, para conciliar el pago y recibir los productos solicitados en su Orden, o para algún inconveniente con su pedido.."
+    },
+    {
+      "question": "¿Cómo se realizan los pagos de los productos de mi Tienda?",
+      "answer": "Para que el Cliente pueda pagarte por la Orden de Solicitud realizada en tu Tienda tienes, como Propietario, la posibilidad de Contactar con él vía WhatsApp, donde concilian la forma de pago de su solicitud y la entrega de los productos al Cliente. Tú como Propietario tendrás la Orden que emitió el Cliente con todos los productos de su Pedido.."
+    },
+    {
+      "question": "¿Dónde se le hace la entrega de los productos solicitados a los Clientes?",
+      "answer": "La entrega, igualmente que el pago, se coordina vía WhatsApp entre el Propietario y el Cliente. Se debe hacer según Orden de Solicitud enviada al Propietario por la Plataforma, y dejarle copia impresa al Cliente una vez ejecutada la entrega."
+    },
+    {
+      "question": "¿En qué moneda pago mi suscripción mensual?",
+      "answer": "Se aceptan pagos en cualquier moneda y por cualquier vía de pago, siempre contemplando el cambio actual en el mercado informal de Cuba"
+    },
+    {
+      "question": "¿En qué moneda promuevo mis productos y le cobro a mis Clientes?",
+      "answer": "Puedes vender tus productos en cualquier moneda que tú entiendas, igual puedes mostrar tus productos en una moneda y aceptar otros tipos de moneda al cambio que definas como Propietario del Negocio, y lo coordines vía WhatsApp con el Cliente"
+    },
+    {
+      "question": "¿Tendré mi propio enlace a mi Tienda o es el mismo de la Aplicación?",
+      "answer": "La aplicación está en el dominio enelgaraje.com y todo Propietario de Negocio que contrate el Plan Básico de Suscripción Mensual, tendrá un subdominio del dominio principal de la aplicación, ejemplo: tu-tienda.enelgaraje.com. Si quisieras obtener un dominio propio, diferente al dominio principal de la aplicación, debes contratar el Plan Business ó el Plan Premium"
+    },
+    {
+      "question": "¿Qué productos puedo comercializar en mi Tienda?",
+      "answer": "Puedes comercializar todos los productos de tu Negocio actual, siempre y cuando no incumplas las políticas firmadas y aprobadas por ti en el Contrato."
+    },
+    {
+      "question": "¿Qué tipo de archivo de imagen permite subir las fotos?",
+      "answer": "Se permiten archivos de imágenes en formato .jpg, .png, .gif, .bmp"
+    },
+    {
+      "question": "¿Qué tamaño de fotos puedo subir y cuántas se permite por producto?",
+      "answer": "Para evitar demora en la carga de imágenes en la Tienda, deberá subir fotos de hasta 5MB. Se permiten por el momento, hasta 4 fotos por producto, una foto principal y tres de apoyo"
+    },
+    {
+      "question": "¿Puedo ser propietario o Vendedor de más de un Negocio, es decir, tener más de una Tienda?",
+      "answer": "El Plan Básico admite ser Propietario de un solo Negocio en nuestra Plataforma. Si administra más de un Negocio, deberá contratar el Plan Business o el Plan Premium."
+    },
+    {
+      "question": "¿Puedo tener mi propio logotipo y portada en mi Tienda?",
+      "answer": "Las Tiendas creadas bajo en Plan Básico, tendrán todas la misma Portada de la Aplicación EnElGaraje y el logotipo de nuestra marca que nos identifica. Para poder tener su propio logotipo e imagen de Portada en tu Tienda, deberás contratar el Plan Business o el Plan Premium."
+    },
+    {
+      "question": "¿Cómo mis clientes pueden encontrar ó descubrir mi Tienda y acceder a ella para adquirir mis productos?",
+      "answer": "Ud promoverá su Tienda Online en las redes sociales, a través de un código QR que se lo podemos ofertar, ó a través del enlace entregado por el Staff de EnElGaraje. También puedes compartir ese enlace vía WhatsApp ó Telegram con todos tus Contactos del Teléfono."
+    },
+    {
+      "question": "¿Cómo hago para cambiarme de Plan de suscripción mensual de la App?",
+      "answer": "Debe contactar a cualquier miembro del Staff de EnElGaraje y solicitar su Cambio de Plan."
+    },
+    {
+      "question": "En caso de problemas técnicos en mi Tienda, ¿Cómo contacto al Sta ?",
+      "answer": "Puede contactar a cualquier miembro del Staff de EnElGaraje vía WhatsApp ó Telegram, estaremos encantados de guiarte y ayudarte a resolver cualquier problema que tengas con tu Tienda Online. Tenemos además este número de contacto (+53) 5 058 6327 vía WhatsApp, donde será atendido las 24 horas del día, los 365 días del año"
+    },
+    {
+      "question": "¿Obtengo algún beneficio si busco más Propietarios de Negocios que abran su Tienda con la App EnElGaraje?",
+      "answer": "El Staff de EnElGaraje le otorgará un Premio que consiste en 1 mes gratis en el uso de la aplicación y la Gestión de su Tienda/Negocio."
+    }
+  ]
+}
