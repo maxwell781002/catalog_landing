@@ -28,7 +28,7 @@ interface PricingSectionProps {
     title: string;
     subTitle: string;
     starterKit: Product;
-    BussinesPlan: Product;
+    BusinessPlan: Product;
     professionalToolbox: Product;
   };
 }
@@ -85,13 +85,13 @@ interface PricingSectionProps {
         }
       </ul>
       <!-- CTA for purchasing the product -->
-      <!-- <a
+      <a
         href={pricing.starterKit.purchaseLink}
         class="block rounded-lg bg-gray-500 px-8 py-3 text-center text-sm font-bold text-gray-100 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-600 focus-visible:ring active:text-gray-300 md:text-base"
         >{pricing.starterKit.purchaseBtnTitle}</a
-      > -->
+      >
     </div>
-    <!-- Bussines Plan details -->
+    <!-- Business Plan details -->
     <div
       class="w-full lg:w-[30%] rounded-xl bg-gradient-to-tr from-[#FF512F] to-[#ffba0a] p-6 shadow-xl sm:p-8"
     >
@@ -100,9 +100,9 @@ interface PricingSectionProps {
       >
         <div>
           <h3 class="text-2xl font-bold text-neutral-100 sm:text-3xl">
-            {pricing.BussinesPlan.name}
+            {pricing.BusinessPlan.name}
           </h3>
-          <p class="text-orange-200">{pricing.BussinesPlan.description}</p>
+          <p class="text-orange-200">{pricing.BusinessPlan.description}</p>
         </div>
 
         <!-- <span
@@ -113,19 +113,19 @@ interface PricingSectionProps {
 
       <div class="mb-4">
         <span class="text-6xl font-bold text-neutral-100"
-          >{pricing.BussinesPlan.price}</span
+          >{pricing.BusinessPlan.price}</span
         >
         <span class="text-lg font-bold text-orange-100"
-          >{pricing.BussinesPlan.cents}</span
+          >{pricing.BusinessPlan.cents}</span
         >
         <span class="ms-3 text-orange-200"
-          >{pricing.BussinesPlan.billingFrequency}</span
+          >{pricing.BusinessPlan.billingFrequency}</span
         >
       </div>
       <!-- Features list - automatically created by mapping over `features` array -->
       <ul class="mb-6 space-y-2 text-orange-100">
         {
-          pricing.BussinesPlan.features.map((feature: string) => (
+          pricing.BusinessPlan.features.map((feature: string) => (
             <li class="flex items-center gap-1.5">
               <Icon name="checkCircle" />
 
@@ -135,11 +135,11 @@ interface PricingSectionProps {
         }
       </ul>
       <!-- CTA for purchasing the product -->
-      <!-- <a
-        href={pricing.professionalToolbox.purchaseLink}
+      <a
+        href={pricing.BusinessPlan.purchaseLink}
         class="block rounded-lg bg-orange-200 bg-opacity-50 px-8 py-3 text-center text-sm font-bold text-neutral-100 outline-none ring-orange-300 transition duration-100 hover:bg-orange-300 hover:bg-opacity-50 focus-visible:ring active:bg-orange-400 md:text-base"
-        >{pricing.professionalToolbox.purchaseBtnTitle}</a
-      > -->
+        >{pricing.BusinessPlan.purchaseBtnTitle}</a
+      >
     </div>
     <!-- Professional Toolbox product details -->
     <div
@@ -185,11 +185,11 @@ interface PricingSectionProps {
         }
       </ul>
       <!-- CTA for purchasing the product -->
-      <!-- <a
+      <a
         href={pricing.professionalToolbox.purchaseLink}
         class="block rounded-lg bg-orange-200 bg-opacity-50 px-8 py-3 text-center text-sm font-bold text-neutral-100 outline-none ring-orange-300 transition duration-100 hover:bg-orange-300 hover:bg-opacity-50 focus-visible:ring active:bg-orange-400 md:text-base"
         >{pricing.professionalToolbox.purchaseBtnTitle}</a
-      > -->
+      >
     </div>
   </div>
   <!-- Call to action for Enterprise Solutions -->
