@@ -41,7 +41,7 @@ app.post('/enviar-formulario', (req, res) => {
   // Configura el correo electrónico
   const mailOptions = {
     from: process.env.NODEMAILER_USER, // Usar variable de entorno
-    to: process.env.NODEMAILER_USER, // Usar variable de entorno
+    to: process.env.NODEMAILER_DEST, // Usar variable de entorno
     subject: 'Nuevo formulario de contacto',
     text: `
       Nombre: ${nombre}

@@ -73,7 +73,9 @@ app.post("/api/waitlist", async (req, res) => {
     // Enviar notificación por correo
     const mailOptions = {
       from: process.env.NODEMAILER_USER, // Usar variable de entorno
-      to: process.env.NODEMAILER_USER, // Usar variable de entorno
+      to: process.env.NODEMAILER_DEST, // Usar variable de entorno
+      //cc: 'copia1@example.com, copia2@example.com', // Destinatarios en copia
+      //bcc: 'copiaoculta1@example.com, copiaoculta2@example.com', // Destinatarios en copia oculta
       subject: "Nuevo cliente en la lista de espera",
       text: `Nombre: ${name}\nNegocio: ${business}\nTeléfono: ${phone}\nCorreo: ${email}`,
     };
