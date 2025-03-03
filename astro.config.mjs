@@ -3,9 +3,15 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import compressor from "astro-compressor";
 import starlight from "@astrojs/starlight";
+import { defineConfig } from 'astro/config';
+//import swiper from '@astrojs/swiper';
+
+
+
 
 // https://astro.build/config
 export default defineConfig({
+ // integrations: [swiper()],
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   site: "https://screwfast.uk",
   image: {

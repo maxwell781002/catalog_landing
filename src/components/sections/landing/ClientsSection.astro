@@ -10,6 +10,7 @@ import machitos from "@images/logotipos/machitos.png";
 import produccionesgranado from "@images/logotipos/produccionesgranado.png";
 import logo from "@images/logotipos/logo.png";
 
+// Lista de logotipos
 const clients = [
   {
     image: villotalleres,
@@ -46,14 +47,21 @@ const clients = [
     alt: 'logo',
     height: 100,
   },
-]
+];
 
 // Define TypeScript interface for props
 interface Props {
   title: string;
   subTitle?: string;
 }
+
+// Declarar Glide manualmente para TypeScript
+declare const Glide: any;
 ---
+
+<!-- Import Glide CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@latest/dist/css/glide.core.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@latest/dist/glide.min.js"></script>
 
 <section
   class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
@@ -73,18 +81,98 @@ interface Props {
       )
     }
   </div>
-  <div
-    class="flex flex-col flex-wrap items-center justify-center gap-y-2 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-24"
-  >
-    {clients.map(({ image, alt, height }) => (
-      <Image
-        src={image as any}
-        alt={alt as unknown as string}
-        draggable={"false"}
-        format={"avif"}
-        loading={"eager"}
-        height={height}
-      />
-    ))}
+
+  <!-- Glide container -->
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <div class="glide__slides">
+        {clients.map(({ image, alt, height }) => (
+          <div class="glide__slide flex items-center justify-center">
+            <Image
+              src={image as any}
+              alt={alt as unknown as string}
+              draggable={"false"}
+              format={"avif"}
+              loading={"eager"}
+              height={height}
+              class="max-h-24 object-contain"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="glide__arrows" data-glide-el="controls">
+      <button
+        class="glide__arrow glide__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/20 p-4 rounded-full shadow-lg hover:bg-black/30 transition-colors"
+        data-glide-dir="<"
+      >
+        <!-- Flecha izquierda (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+      <button
+        class="glide__arrow glide__arrow--right absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/20 p-4 rounded-full shadow-lg hover:bg-black/30 transition-colors"
+        data-glide-dir=">"
+      >
+        <!-- Flecha derecha (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
 </section>
+
+<!-- Import Glide JS -->
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+
+<!-- Initialize Glide -->
+<script>
+  // Asegúrate de que el script de Glide se haya cargado antes de inicializarlo
+  window.addEventListener("load", () => {
+    // Verifica que el contenedor .glide exista
+    if (document.querySelector('.glide')) {
+      new Glide('.glide', {
+        type: 'carousel', // Tipo de carrusel (puede ser 'slider' o 'carousel')
+        perView: 4, // Muestra 4 logotipos a la vez
+        gap: 30, // Espacio entre los slides
+        breakpoints: {
+          // Ajustes responsivos
+          1024: {
+            perView: 3, // Muestra 3 logotipos en pantallas grandes
+          },
+          640: {
+            perView: 2, // Muestra 2 logotipos en pantallas pequeñas
+          },
+        },
+      }).mount();
+    } else {
+      console.error("No se encontró el contenedor .glide");
+    }
+  });
+</script>

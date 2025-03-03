@@ -11,10 +11,15 @@ import Icon from "@components/ui/icons/Icon.astro";
 // Define the variables that will be used in this component
 const title: string = "Contáctenos";
 const subTitle: string =
-  "¿Tiene alguna pregunta o quiere montar su tienda EnElGaraje? Póngase en contacto con nosotros y creemos la solución perfecta con nuestras herramientas y servicios.";
-const formTitle: string = "Fill in the form below";
-const formSubTitle: string = "We'll get back to you in 1-2 business days.";
+  "¿Tiene alguna pregunta o quiere montar su tienda EnElGaraje? \n Póngase en contacto con nosotros y creemos la solución perfecta con nuestras herramientas y servicios.";
+const formTitle: string = "Envíenos su mensaje";
+const formSubTitle: string = "Le responderemos dentro de 1 a 2 días hábiles, tan pronto podamos. Manténgase al tanto de su buzón de correo electrónico";
 ---
+
+<!-- Notificación -->
+<div id="notification" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg bg-green-500 text-white z-50">
+  <span id="notification-message"></span>
+</div>
 
 <!-- Contact Us -->
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -31,39 +36,39 @@ const formSubTitle: string = "We'll get back to you in 1-2 business days.";
     </div>
 
     <div class="mt-12 grid items-center gap-6 lg:gap-16">
-      <!-- <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8"> -->
-        <!-- <h2
+      <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8">
+        <h2
           class="mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300"
         >
           {formTitle}
-        </h2> -->
-        <!-- Form for user input with various input fields.-->
-        <!-- Each field utilizes a different input component for the specific type of input (text, email, phone, and textarea)-->
-        <!-- <form>
+        </h2>
+        <!-- Form for user input with various input fields.
+        Each field utilizes a different input component for the specific type of input (text, email, phone, and textarea) -->
+        <form id="contact-form">
           <div class="grid gap-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <TextInput
                 id="hs-firstname-contacts"
-                label="First Name"
-                name="hs-firstname-contacts"
+                label="Nombre completo"
+                name="nombre"
               />
               <TextInput
                 id="hs-lastname-contacts"
-                label="Last Name"
-                name="hs-firstname-contacts"
+                label="Apellido"
+                name="apellido"
               />
             </div>
-            <EmailContactInput id="hs-email-contacts" />
-            <PhoneInput id="hs-phone-number" />
+            <EmailContactInput id="hs-email-contacts" name="email" /> <!-- Agregado name -->
+            <PhoneInput id="hs-phone-number" name="telefono" /> <!-- Agregado name -->
             <TextAreaInput
               id="hs-about-contacts"
-              label="Details"
-              name="hs-about-contacts"
+              label="Detalles"
+              name="detalles"
             />
           </div>
 
           <div class="mt-4 grid">
-            <AuthBtn title="Send Message" />
+            <AuthBtn title="Enviar mensaje" type="submit" />
           </div>
 
           <div class="mt-3 text-center">
@@ -71,48 +76,96 @@ const formSubTitle: string = "We'll get back to you in 1-2 business days.";
               {formSubTitle}
             </p>
           </div>
-        </form> -->
-      <!-- </div> -->
-
-      <!--ContactIconBlocks are used to display different methods of contacting, including visiting office, email, browsing knowledgebase, and FAQ.-->
-      <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
-        <ContactIconBlock
-          heading="Knowledgebase"
-          content="Browse through all of our knowledgebase articles."
-          isLinkVisible={true}
-          linkTitle="Visit guides & tutorials"
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="question" />
-        </ContactIconBlock>
-
-        <ContactIconBlock
-          heading="FAQ"
-          content="Explore our FAQ for quick, clear answers to common queries."
-          isLinkVisible={true}
-          linkTitle="Visit FAQ"
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="chatBubble" />
-        </ContactIconBlock>
-
-        <!-- <ContactIconBlock
-          heading="Visit our office"
-          content="UK ScrewFast"
-          isAddressVisible={true}
-          addressContent="72 Union Terrace, E10 4PE London"
-          ><Icon name="mapPin" />
-        </ContactIconBlock> -->
-
-        <ContactIconBlock
-          heading="Contact us by email"
-          content="Prefer the written word? Drop us an email at"
-          isLinkVisible={true}
-          linkTitle="support@screwfast.uk"
-          linkURL="#"
-          ><Icon name="envelopeOpen" />
-        </ContactIconBlock>
+        </form>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Script para manejar el envío del formulario -->
+<script>
+  const form = document.getElementById('contact-form');
+  const notification = document.getElementById('notification');
+  const notificationMessage = document.getElementById('notification-message');
+
+  if (form && notification && notificationMessage) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Evita el envío tradicional del formulario
+
+      // Afirmar que event.target es un HTMLFormElement
+      const formElement = event.target as HTMLFormElement;
+
+      // Validar campos obligatorios
+      const nombre = formElement.nombre.value.trim();
+      const apellido = formElement.apellido.value.trim();
+      const email = formElement.email.value.trim();
+      const telefono = formElement.telefono.value.trim();
+      const detalles = formElement.detalles.value.trim();
+
+      if (!nombre || !apellido || !email || !telefono || !detalles) {
+        // Muestra una notificación de error si algún campo está vacío
+        notification.classList.remove('hidden');
+        notification.classList.remove('bg-green-500');
+        notification.classList.add('bg-red-500');
+        notificationMessage.textContent = 'Todos los campos son obligatorios.';
+
+        // Oculta la notificación después de 5 segundos
+        setTimeout(() => {
+          notification.classList.add('hidden');
+        }, 5000);
+        return; // Detiene el envío del formulario
+      }
+
+      const formData = new FormData(formElement); // Usar formElement en lugar de event.target
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('http://localhost:3001/enviar-formulario', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        // Muestra la notificación
+        if (result.success) {
+          notification.classList.remove('hidden');
+          notification.classList.remove('bg-red-500');
+          notification.classList.add('bg-green-500');
+          notificationMessage.textContent = result.message;
+
+          // Limpia los campos del formulario
+          formElement.reset();
+        } else {
+          notification.classList.remove('hidden');
+          notification.classList.remove('bg-green-500');
+          notification.classList.add('bg-red-500');
+          notificationMessage.textContent = result.message;
+        }
+
+        // Oculta la notificación después de 5 segundos
+        setTimeout(() => {
+          notification.classList.add('hidden');
+        }, 5000);
+      } catch (error) {
+        console.error('Error:', error);
+
+        // Muestra una notificación de error si hay un problema con la solicitud
+        notification.classList.remove('hidden');
+        notification.classList.remove('bg-green-500');
+        notification.classList.add('bg-red-500');
+        notificationMessage.textContent = 'Error al enviar el formulario. Inténtalo de nuevo.';
+
+        // Oculta la notificación después de 5 segundos
+        setTimeout(() => {
+          notification.classList.add('hidden');
+        }, 5000);
+      }
+    });
+  } else {
+    console.error('No se encontraron los elementos del formulario o la notificación.');
+  }
+</script>

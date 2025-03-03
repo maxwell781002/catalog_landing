@@ -1,6 +1,10 @@
 ---
 import TestimonialItem from "./TestimonialItem.astro";
 import StatsGrid from "../../ui/blocks/StatsGrid.astro";
+// Importar estilos de Swiper
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const {
   title,
@@ -16,7 +20,6 @@ interface Props {
   statistics?: StatProps[];
 }
 
-// TypeScript type for testimonials
 type Testimonial = {
   content: string;
   author: string;
@@ -24,7 +27,6 @@ type Testimonial = {
   avatarSrc: string;
 };
 
-// TypeScript type for stats.
 type StatProps = {
   count: string;
   description: string;
@@ -34,47 +36,103 @@ type StatProps = {
 <section
   class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
 >
-  <!-- Container for the testimonials -->
-  <div
-    class="lg:grid lg:grid-cols-12 lg:items-center lg:justify-between lg:gap-16"
-  >
-    <div class="lg:col-span-5 lg:col-start-1">
-      <!-- Title and Subtitle -->
-      <div class="mb-8">
-        <h2
-          class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
-        >
-          {title}
-        </h2>
-        {subTitle &&
-        <p class="text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      }
-      </div>
+  <div class="mb-8 text-center">
+    <h2
+      class="mb-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
+    >
+      {title}
+    </h2>
+    {subTitle &&
+    <p class="text-neutral-600 dark:text-neutral-400">
+      {subTitle}
+    </p>
+    }
+  </div>
 
-      <!-- Generate a blockquote for each testimonial in the testimonials array by mapping over the array. -->
-      { testimonials &&
-        testimonials.map((testimonial) => (
-        <TestimonialItem content={testimonial.content} author={testimonial.author} role={testimonial.role} avatarSrc={testimonial.avatarSrc} />
-        ))
-      }
+  <!-- Carrusel de testimonios con Swiper -->
+  {testimonials && (
+    <div class="swiper-container relative">
+      <div class="swiper-wrapper">
+        {testimonials.map((testimonial) => (
+          <div class="swiper-slide">
+            <div class="mx-auto max-w-[70%]"> <!-- Contenedor reducido al 50% -->
+            <TestimonialItem
+              content={testimonial.content}
+              author={testimonial.author}
+              role={testimonial.role}
+              avatarSrc={testimonial.avatarSrc}
+            />
+            </div>
+          </div>
+        ))}
+      </div>
+      <!-- Botones de navegación -->
+      <div class="swiper-button-next !right-0 !text-[#ffba0a]"></div>
+      <div class="swiper-button-prev !left-0 !text-[#ffba0a]"></div>
+      <!-- Paginación -->
+      <div class="swiper-pagination !relative !bottom-0 !mt-4"></div>
     </div>
-{ statistics &&
-    <div class="mt-10 lg:col-span-6 lg:col-end-13 lg:mt-0">
+  )}
+
+  {statistics && (
+    <div class="mt-10">
       <div class="space-y-6 sm:space-y-8">
         <ul
           class="grid grid-cols-2 divide-x-2 divide-y-2 divide-neutral-300 overflow-hidden dark:divide-neutral-700"
         >
-          <!-- Generate a list item for each stat in the statistics array by mapping over the array. -->
-          {
-            statistics.map((stat, index) => (
-            <StatsGrid count={stat.count} description={stat.description} index={index}/>
-            ))
-          }
+          {statistics.map((stat, index) => (
+            <StatsGrid count={stat.count} description={stat.description} index={index} />
+          ))}
         </ul>
       </div>
     </div>
-  }
-  </div>
+  )}
 </section>
+
+<!-- Inicializar Swiper en el cliente -->
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination } from 'swiper/modules';
+
+  new Swiper('.swiper-container', {
+    modules: [Navigation, Pagination],
+    spaceBetween: 30,
+    slidesPerView: 1, // Por defecto, muestra 1 testimonio
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    loop: true,
+    breakpoints: {
+      640: {
+        slidesPerView: 1, // 1 testimonio en móviles
+      },
+      768: {
+        slidesPerView: 1, // 1 testimonio en tablets
+      },
+      1024: {
+        slidesPerView: 1, // 1 testimonio en escritorio
+      },
+    },
+  });
+</script>
+
+<style>
+  /* Estilos personalizados para la paginación */
+  .swiper-pagination-bullet {
+    background-color: #ffba0a; /* Color de los puntos inactivos */
+    opacity: 0.5; /* Opacidad de los puntos inactivos */
+    width: 20px; /* Ancho de los puntos */
+    height: 20px; /* Altura de los puntos */
+    margin: 0 5px; /* Espacio entre los puntos */
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ffba0a !important; /* Color del punto activo */
+    opacity: 1 !important; /* Opacidad del punto activo */
+  }
+</style>
