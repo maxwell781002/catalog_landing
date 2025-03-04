@@ -3,13 +3,14 @@ import sharp from "sharp";
 import ico from "sharp-ico";
 import path from "node:path";
 
+// Ruta de la imagen fuente
 const faviconSrc = path.resolve("src/images/logo-peque.png");
 
 export const GET: APIRoute = async () => {
-
-  // Resize the image to multiple sizes
+  // Tamaños para el favicon
   const sizes = [16, 32];
 
+  // Redimensionar la imagen a los tamaños especificados
   const buffers = await Promise.all(
     sizes.map(async (size) => {
       return await sharp(faviconSrc)
@@ -19,9 +20,10 @@ export const GET: APIRoute = async () => {
     })
   );
 
-  // Convert the image to an ICO file
+  // Convertir las imágenes a un archivo ICO
   const icoBuffer = ico.encode(buffers);
 
+  // Devolver la respuesta con el favicon en formato ICO
   return new Response(icoBuffer, {
     headers: { "Content-Type": "image/x-icon" },
   });

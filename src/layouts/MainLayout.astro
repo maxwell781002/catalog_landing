@@ -4,7 +4,7 @@ import Meta from "@components/Meta.astro";
 import Navbar from "@components/sections/navbar&footer/Navbar.astro";
 import FooterSection from "@components/sections/navbar&footer/FooterSection.astro";
 import { SITE } from "@data/constants";
-
+ 
 // Setting expected props
 const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
 
@@ -30,6 +30,7 @@ We set the language of the page to English and add classes for scrollbar and scr
 
     <!-- Favicon -->
     <!-- Links for favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link href="/logo-peque.png" rel="apple-touch-icon" />
     <link href="/logo-peque.png" rel="icon" type="image/png" sizes="any" />
     <meta name="mobile-web-app-capable" content="yes" />
