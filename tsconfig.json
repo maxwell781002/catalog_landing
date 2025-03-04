@@ -12,5 +12,11 @@
       "@styles/*": ["src/assets/styles/*"],
       "@utils/*": ["src/utils/*"]
     },
-  }
+    "typeRoots": ["./node_modules/@types", "./src/types"], // Añadir typeRoots si es necesario
+    "strict": true, // Asegúrate de que strict esté habilitado
+    "esModuleInterop": true, // Habilitar esModuleInterop para compatibilidad con módulos CommonJS
+    "skipLibCheck": true // Omitir la verificación de tipos en archivos de declaración
+  },
+  "include": ["src/**/*", "glide.d.ts"], // Incluir todos los archivos en src y glide.d.ts
+  "exclude": ["node_modules", "dist"] // Excluir node_modules y dist
 }
