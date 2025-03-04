@@ -120,7 +120,7 @@ const formSubTitle: string = "Le responderemos dentro de 1 a 2 días hábiles, t
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch('http://localhost:3001/enviar-formulario', {
+        const response = await fetch('http://localhost:3000/enviar-formulario', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

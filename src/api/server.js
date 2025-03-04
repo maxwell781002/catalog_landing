@@ -12,17 +12,16 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Cargar variables de entorno desde la raíz del proyecto
+// Cargar variables de entorno
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-
-// Depuración: Verificar que DATABASE_URL esté cargada correctamente
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 const app = express();
 
 // Habilitar CORS
 app.use(cors());
 
+// Configura body-parser para manejar solicitudes JSON y URL-encoded
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configuración de la base de datos (PostgreSQL en Neon)
@@ -31,16 +30,6 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
-});
-
-// Validar la conexión a la base de datos
-pool.connect((err, client, done) => {
-  if (err) {
-    console.error("Error al conectar a la base de datos:", err);
-  } else {
-    console.log("Conexión a la base de datos exitosa");
-    done();
-  }
 });
 
 // Configuración de Nodemailer
@@ -55,7 +44,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Ruta para manejar el formulario
+// Ruta para manejar el formulario de lista de espera
 app.post("/api/waitlist", async (req, res) => {
   const { name, business, phone, email } = req.body;
 
@@ -74,8 +63,6 @@ app.post("/api/waitlist", async (req, res) => {
     const mailOptions = {
       from: process.env.NODEMAILER_USER, // Usar variable de entorno
       to: process.env.NODEMAILER_DEST, // Usar variable de entorno
-      //cc: 'copia1@example.com, copia2@example.com', // Destinatarios en copia
-      //bcc: 'copiaoculta1@example.com, copiaoculta2@example.com', // Destinatarios en copia oculta
       subject: "Nuevo cliente en la lista de espera",
       text: `Nombre: ${name}\nNegocio: ${business}\nTeléfono: ${phone}\nCorreo: ${email}`,
     };
@@ -90,7 +77,7 @@ app.post("/api/waitlist", async (req, res) => {
   }
 });
 
-// Nuevo endpoint para obtener la lista de clientes en la lista de espera
+// Ruta para obtener la lista de clientes en la lista de espera
 app.get("/api/waitlist", async (req, res) => {
   try {
     const result = await pool.query("SELECT business FROM waitlist");
@@ -100,6 +87,35 @@ app.get("/api/waitlist", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ success: false, error: "Error al obtener la lista de espera" });
   }
+});
+
+// Ruta para manejar el formulario de contacto
+app.post("/enviar-formulario", (req, res) => {
+  const { nombre, apellido, email, telefono, detalles } = req.body;
+
+  // Configura el correo electrónico
+  const mailOptions = {
+    from: process.env.NODEMAILER_USER, // Usar variable de entorno
+    to: process.env.NODEMAILER_DEST, // Usar variable de entorno
+    subject: "Nuevo formulario de contacto",
+    text: `
+      Nombre: ${nombre}
+      Apellido: ${apellido}
+      Email: ${email}
+      Teléfono: ${telefono}
+      Detalles: ${detalles}
+    `,
+  };
+
+  // Envía el correo
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ success: false, message: "Error al enviar el correo" });
+    }
+    console.log("Correo enviado: " + info.response);
+    res.status(200).json({ success: true, message: "Correo enviado correctamente" });
+  });
 });
 
 // Iniciar el servidor
