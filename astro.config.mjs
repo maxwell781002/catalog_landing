@@ -128,4 +128,7 @@ export default defineConfig({
     clientPrerender: true,
     directRenderScript: true,
   },
+  // server: {
+  //   port: 3000, // Cambia el puerto a 3000 o cualquier otro disponible
+  // },
 });

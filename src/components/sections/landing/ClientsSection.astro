@@ -12,82 +12,66 @@ import logo from "@images/logotipos/logo.png";
 
 // Lista de logotipos
 const clients = [
-  {
-    image: villotalleres,
-    alt: 'Villotalleres',
-    height: 150,
-  },
-  {
-    image: heladoMio,
-    alt: 'Helado mio',
-    height: 100,
-  },
-  {
-    image: latiendita,
-    alt: 'La Tiendita',
-    height: 250,
-  }, 
-  {
-    image: mobiliariocastillo,
-    alt: 'Mobiliario Castillo',
-    height: 100,
-  },
-  {
-    image: machitos,
-    alt: 'machitos',
-    height: 100,
-  },
-  {
-    image: produccionesgranado,
-    alt: 'produccionesgranado',
-    height: 100,
-  },
-  {
-    image: logo,
-    alt: 'logo',
-    height: 100,
-  },
+  { image: villotalleres, alt: 'Villotalleres', height: 150 },
+  { image: heladoMio, alt: 'Helado mio', height: 100 },
+  { image: latiendita, alt: 'La Tiendita', height: 250 },
+  { image: mobiliariocastillo, alt: 'Mobiliario Castillo', height: 100 },
+  { image: machitos, alt: 'machitos', height: 100 },
+  { image: produccionesgranado, alt: 'produccionesgranado', height: 100 },
+  { image: logo, alt: 'logo', height: 100 },
 ];
-
-// Define TypeScript interface for props
-interface Props {
-  title: string;
-  subTitle?: string;
-}
 ---
 
 <!-- Import Glide CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@latest/dist/css/glide.core.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@latest/dist/glide.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
 
-<section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
->
+<!-- Estilos personalizados para el carrusel -->
+<style>
+  .glide {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .glide__track {
+    overflow: hidden;
+  }
+  .glide__slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .glide__slide {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
   <!-- Title and description -->
   <div class="mx-auto mb-6 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
-    <h2
-      class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl"
-    >
+    <h2 class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl">
       {title}
     </h2>
-    {
-      subTitle && (
-        <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      )
-    }
+    {subTitle && (
+      <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    )}
   </div>
 
   <!-- Glide container -->
-  <div class="glide">
+  <div class="glide" style="position: relative;">
     <div class="glide__track" data-glide-el="track">
       <div class="glide__slides">
         {clients.map(({ image, alt, height }) => (
           <div class="glide__slide flex items-center justify-center">
             <Image
-              src={image as any}
-              alt={alt as unknown as string}
+              src={image}
+              alt={alt}
               draggable={"false"}
               format={"avif"}
               loading={"eager"}
@@ -146,26 +130,20 @@ interface Props {
 </section>
 
 <!-- Import Glide JS -->
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
 
 <!-- Initialize Glide -->
-<script>
-  // Asegúrate de que el script de Glide se haya cargado antes de inicializarlo
+<script is:inline>
   window.addEventListener("load", () => {
-    // Verifica que el contenedor .glide exista
+    console.log("Glide script loaded");
     if (document.querySelector('.glide')) {
       new Glide('.glide', {
-        type: 'carousel', // Tipo de carrusel (puede ser 'slider' o 'carousel')
-        perView: 4, // Muestra 4 logotipos a la vez
-        gap: 30, // Espacio entre los slides
+        type: 'carousel',
+        perView: 4,
+        gap: 30,
         breakpoints: {
-          // Ajustes responsivos
-          1024: {
-            perView: 3, // Muestra 3 logotipos en pantallas grandes
-          },
-          640: {
-            perView: 2, // Muestra 2 logotipos en pantallas pequeñas
-          },
+          1024: { perView: 3 },
+          640: { perView: 2 },
         },
       }).mount();
     } else {
