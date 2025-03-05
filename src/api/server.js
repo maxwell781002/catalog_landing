@@ -119,7 +119,7 @@ app.post("/enviar-formulario", (req, res) => {
 });
 
 // Iniciar el servidor
-const PORT = process.env.PORT || 3000; // Usar variable de entorno
+const PORT = process.env.PORT || 3001; // Usar variable de entorno
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

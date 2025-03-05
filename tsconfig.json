@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -16,7 +16,17 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["swiper"] 
+    "types": ["swiper"],
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "include": ["src/**/*", "glide.d.ts", "globals.d.ts"],
   "exclude": ["node_modules", "dist"]
