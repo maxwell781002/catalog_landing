@@ -1,27 +1,65 @@
 ---
-// src/components/SwiperComponent.astro
-import Swiper from 'swiper';
-import 'swiper/swiper-bundle.css'; // Importa los estilos de Swiper
+ // Importar Swiper y sus módulos
+ import Swiper from 'swiper';
+  import { Navigation, Pagination } from 'swiper/modules';
+
+  // Importar estilos de Swiper
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
 ---
 
-<div class="swiper">
+<!-- Contenido del componente -->
+<div class="swiper-container relative">
   <div class="swiper-wrapper">
+    <!-- Slides aquí -->
     <div class="swiper-slide">Slide 1</div>
     <div class="swiper-slide">Slide 2</div>
     <div class="swiper-slide">Slide 3</div>
   </div>
-  <!-- Agrega paginación, botones de navegación, etc. si es necesario -->
-  <div class="swiper-pagination"></div>
+  <!-- Botones de navegación -->
+  <div class="swiper-button-next !right-0 !text-[#ffba0a]"></div>
+  <div class="swiper-button-prev !left-0 !text-[#ffba0a]"></div>
+  <!-- Paginación -->
+  <div class="swiper-pagination !relative !bottom-0 !mt-4"></div>
 </div>
 
+<!-- Inicializar Swiper -->
 <script>
-  // Inicializa Swiper
-  const swiper = new Swiper('.swiper', {
-    // Opciones de configuración
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
+   // Importar Swiper y sus módulos
+   import Swiper from 'swiper';
+  import { Navigation, Pagination } from 'swiper/modules';
+
+  // Importar estilos de Swiper
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('.swiper-container', {
+      modules: [Navigation, Pagination],
+      spaceBetween: 30,
+      slidesPerView: 1,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      loop: true,
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 1,
+        },
+      },
+    });
   });
 </script>

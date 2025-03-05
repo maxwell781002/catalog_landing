@@ -91,8 +91,14 @@ type StatProps = {
 
 <!-- Inicializar Swiper en el cliente -->
 <script>
+  // Importar Swiper y sus módulos
   import Swiper from 'swiper';
   import { Navigation, Pagination } from 'swiper/modules';
+
+  // Importar estilos de Swiper
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
 
   new Swiper('.swiper-container', {
     modules: [Navigation, Pagination],
