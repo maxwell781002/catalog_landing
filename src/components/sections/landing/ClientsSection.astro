@@ -4,87 +4,150 @@ const { title, subTitle } = Astro.props;
 import { Image } from "astro:assets";
 import villotalleres from "@images/logotipos/villotalleres.png";
 import heladoMio from "@images/logotipos/helado-mio.png";
-import alvarezautomotriz from "@images/logotipos/alvarezautomotriz.png";
-import ire from "@images/logotipos/ire.jpg";
+import mobiliariocastillo from "@images/logotipos/mobiliario-castillo.png";
+import latiendita from "@images/logotipos/la-tiendita.png";
 import machitos from "@images/logotipos/machitos.png";
 import produccionesgranado from "@images/logotipos/produccionesgranado.png";
 import logo from "@images/logotipos/logo.png";
 
+// Lista de logotipos
 const clients = [
-  {
-    image: villotalleres,
-    alt: 'Villotalleres',
-    height: 150,
-  },
-  {
-    image: heladoMio,
-    alt: 'Helado mio',
-    height: 100,
-  },
-  {
-    image: alvarezautomotriz,
-    alt: 'Alvarez Automotriz',
-    height: 250,
-  },
-  {
-    image: ire,
-    alt: 'Ire',
-    height: 100,
-  },
-  {
-    image: machitos,
-    alt: 'machitos',
-    height: 100,
-  },
-  {
-    image: produccionesgranado,
-    alt: 'produccionesgranado',
-    height: 100,
-  },
-  {
-    image: logo,
-    alt: 'logo',
-    height: 100,
-  },
-]
-
-// Define TypeScript interface for props
-interface Props {
-  title: string;
-  subTitle?: string;
-}
+  { image: villotalleres, alt: 'Villotalleres', height: 150 },
+  { image: heladoMio, alt: 'Helado mio', height: 100 },
+  { image: latiendita, alt: 'La Tiendita', height: 250 },
+  { image: mobiliariocastillo, alt: 'Mobiliario Castillo', height: 100 },
+  { image: machitos, alt: 'machitos', height: 100 },
+  { image: produccionesgranado, alt: 'produccionesgranado', height: 100 },
+  { image: logo, alt: 'logo', height: 100 },
+];
 ---
 
-<section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
->
+<!-- Import Glide CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+
+<!-- Estilos personalizados para el carrusel -->
+<style>
+  .glide {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .glide__track {
+    overflow: hidden;
+  }
+  .glide__slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .glide__slide {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
   <!-- Title and description -->
   <div class="mx-auto mb-6 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
-    <h2
-      class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl"
-    >
+    <h2 class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl">
       {title}
     </h2>
-    {
-      subTitle && (
-        <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      )
-    }
+    {subTitle && (
+      <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    )}
   </div>
-  <div
-    class="flex flex-col flex-wrap items-center justify-center gap-y-2 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-24"
-  >
-    {clients.map(({ image, alt, height }) => (
-      <Image
-        src={image as any}
-        alt={alt as unknown as string}
-        draggable={"false"}
-        format={"avif"}
-        loading={"eager"}
-        height={height}
-      />
-    ))}
+
+  <!-- Glide container -->
+  <div class="glide" style="position: relative;">
+    <div class="glide__track" data-glide-el="track">
+      <div class="glide__slides">
+        {clients.map(({ image, alt, height }) => (
+          <div class="glide__slide flex items-center justify-center">
+            <Image
+              src={image}
+              alt={alt}
+              draggable={"false"}
+              format={"avif"}
+              loading={"eager"}
+              height={height}
+              class="max-h-24 object-contain"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="glide__arrows" data-glide-el="controls">
+      <button
+        class="glide__arrow glide__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/20 p-4 rounded-full shadow-lg hover:bg-black/30 transition-colors"
+        data-glide-dir="<"
+      >
+        <!-- Flecha izquierda (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+      <button
+        class="glide__arrow glide__arrow--right absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/20 p-4 rounded-full shadow-lg hover:bg-black/30 transition-colors"
+        data-glide-dir=">"
+      >
+        <!-- Flecha derecha (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
 </section>
+
+<!-- Import Glide JS -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+
+<!-- Initialize Glide -->
+<script is:inline>
+  window.addEventListener("load", () => {
+    console.log("Glide script loaded");
+    if (document.querySelector('.glide')) {
+      new Glide('.glide', {
+        type: 'carousel',
+        perView: 4,
+        gap: 30,
+        breakpoints: {
+          1024: { perView: 3 },
+          640: { perView: 2 },
+        },
+      }).mount();
+    } else {
+      console.error("No se encontró el contenedor .glide");
+    }
+  });
+</script>

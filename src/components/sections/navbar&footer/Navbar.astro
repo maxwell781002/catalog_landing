@@ -1,5 +1,5 @@
 ---
-//Import relevant dependencies
+// Importaciones y datos existentes
 import { Image } from "astro:assets";
 import ThemeIcon from "@components/ThemeIcon.astro";
 import NavLink from "@components/ui/links/NavLink.astro";
@@ -30,8 +30,13 @@ const homeUrl = Astro.currentLocale === "fr" ? "/fr" : "/";
         href={homeUrl}
         aria-label="Brand"
       >
-        <!-- <BrandLogo class="h-auto w-24" /> -->
-        <Image src={BrandLogo} alt="aaaa" class="h-auto w-16"/>
+        <!-- Logotipo -->
+        <img
+          id="logo"
+          src="/Logo_sin_fondo.png"
+          alt="Logo de EnElGaraje"
+          class="h-auto w-16"
+        />
       </a>
       <!-- Collapse toggle for smaller screens -->
       <div class="ml-auto mr-5 md:hidden">
@@ -102,6 +107,32 @@ const homeUrl = Astro.currentLocale === "fr" ? "/fr" : "/";
     </div>
   </nav>
 </header>
+
+<!-- Script para cambiar el logotipo -->
+<script is:inline>
+  // Función para actualizar el logotipo según el tema
+  function updateLogo() {
+    const logo = document.getElementById("logo");
+    const isDarkMode = document.documentElement.classList.contains("dark");
+
+    if (isDarkMode) {
+      logo.src = "/Logo_sin_fondo_white.png"; // Logotipo para tema oscuro
+    } else {
+      logo.src = "/Logo_sin_fondo.png"; // Logotipo para tema claro
+    }
+  }
+
+  // Observar cambios en el tema
+  const observer = new MutationObserver(updateLogo);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  // Actualizar el logotipo al cargar la página
+  updateLogo();
+</script>
+
 <!-- Theme Appearance script to manage light/dark modes -->
 <script is:inline>
   const HSThemeAppearance = {
@@ -207,6 +238,7 @@ const homeUrl = Astro.currentLocale === "fr" ? "/fr" : "/";
     });
   });
 </script>
+
 <!--Import the necessary Collapse and Overlay plugins-->
 <!--https://preline.co/plugins/html/collapse.html-->
 <!--https://preline.co/plugins/html/overlay.html-->

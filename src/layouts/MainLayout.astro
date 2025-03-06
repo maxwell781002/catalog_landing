@@ -4,6 +4,7 @@ import Meta from "@components/Meta.astro";
 import Navbar from "@components/sections/navbar&footer/Navbar.astro";
 import FooterSection from "@components/sections/navbar&footer/FooterSection.astro";
 import { SITE } from "@data/constants";
+import GoogleAnalytics from "@components/GoogleAnalytics.astro";
 
 // Setting expected props
 const { title = SITE.title, meta, structuredData, lang = "en" } = Astro.props;
@@ -23,10 +24,20 @@ We set the language of the page to English and add classes for scrollbar and scr
 -->
 <html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
   <head>
+    <GoogleAnalytics />
     <!-- Adding metadata to the HTML document -->
     <Meta meta={meta} structuredData={structuredData} />
     <!-- Define the title of the page -->
     <title>{title}</title>
+
+    <!-- Favicon -->
+    <!-- Links for favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link href="/logo-peque.png" rel="apple-touch-icon" />
+    <link href="/logo-peque.png" rel="icon" type="image/png" sizes="any" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#facc15" />
+
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (

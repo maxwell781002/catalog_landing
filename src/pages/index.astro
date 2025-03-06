@@ -19,16 +19,20 @@ import construction from "@images/Imagen-5.jpeg";
 // import tools from "@images/automated-tools.avif";
 import tools from "@images/Imagen-4.jpeg";
 import dashboard from "@images/Imagen-6.jpeg";
+import ContactSection from "@/components/sections/misc/ContactSection.astro";
+
 
 const avatarSrcs: Array<string> = [
   "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
-  "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
-  "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80",
-  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  // Otros avatares...
 ];
 ---
 
 <MainLayout>
+  
+ 
+  
+  
   <!-- <AnnouncementBanner
     btnId="dismiss-button"
     btnTitle="Explore ScrewFast on GitHub"
@@ -41,6 +45,8 @@ const avatarSrcs: Array<string> = [
     subTitle="Innovadora aplicación diseñada para permitir a tu negocio crear y gestionar tu propia tienda online de manera rápida y eficiente."
     primaryBtn="Comienza a explorar"
     primaryBtnURL="https://backoffice.enelgaraje.com"
+    secondaryBtn="Lista de Espera"
+    secondaryBtnURL="/formulario"
     withReview={true}
     avatars={avatarSrcs}
     rating=`<span class="font-bold">4.8</span> / 5`
@@ -51,14 +57,14 @@ const avatarSrcs: Array<string> = [
   />
 
   <ClientsSection
-    title="¿Quiénes confian en nosotros?"
+    title="¿Quiénes confían en nosotros?"
     subTitle="Experimente la fiabilidad elegida por ellos."
   />
 
   <FeaturesGeneral
     title="Satisfacer las demandas del cliente"
     subTitle="Nuestro objetivo es empoderar a pequeños emprendedores y comerciantes con herramientas intuitivas y accesibles, facilitando su presencia en el mundo digital."
-    alt="aaa"
+    alt="Satisfacer las demandas del Cliente"
     src={featureImage}
     features={features}
   />
@@ -72,7 +78,7 @@ const avatarSrcs: Array<string> = [
           "Benefíciese de nuestro comprometido equipo que garantiza que su éxito sea personal. Cuente con la orientación de expertos, asistencia por correo electrónico y chat en vivo según el plan.",
         svg: "groups",
         src: tools,
-        alt: "Yellow and black heavy equipment on brown grass field",
+        alt: "Satisfacer las demandas del Cliente",
         first: true,
       },
       {
@@ -81,7 +87,7 @@ const avatarSrcs: Array<string> = [
           "Utilice nuestra app y descubra lo fácil que es vender sus productos en línea. Cuente con interfaz intuitiva y amigable. Configure su tienda en minutos.",
         svg: "verified",
         src: construction,
-        alt: "Gray metal building frame near tower crane during daytime",
+        alt: "Sencille,z y asequibilidad",
       },
       {
         heading: "Panel intuitivo",
@@ -89,48 +95,37 @@ const avatarSrcs: Array<string> = [
           "Navegue con facilidad gracias a los intuitivos paneles de control de nuestra app. Configure y supervise sus productos sin problemas, con interfaces diseñadas para una gestión rápida y eficaz del flujo de trabajo.",
         svg: "dashboard",
         src: dashboard,
-        alt: "A screenshot or graphic representation of the intuitive dashboard",
+        alt: "Panel intuitivo",
         second: false,
       },
     ]}
   />
 
-  <!-- <TestimonialsSection
-    title="Fast-Track Your Projects"
-    subTitle="At ScrewFast, we ensure a swift start with instant account setup. Experience the speed of construction redefined."
-    ;
-    testimonials={[
-      {
-        content:
-          "ScrewFast dramatically boosted our project efficiency. Setup was instant, and their rapid response times are phenomenal. Truly a game-changer in hardware and construction support!",
-        author: "Samantha Ruiz",
-        role: "Chief Operating Officer | ConstructIt Inc.",
-        avatarSrc:
-          "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-      },
-    ]}
-    statistics={[
-      {
-        count: "70k+",
-        description:
-          "customers equipped — from DIY to major construction firms",
-      },
-      {
-        count: "35%",
-        description:
-          "uptick in project efficiency with ScrewFast tools and services",
-      },
-      {
-        count: "15.3%",
-        description:
-          "reduction in maintenance costs reported by long-term clients",
-      },
-      {
-        count: "2x",
-        description: "quicker assembly using innovative fastening solutions",
-      },
-    ]}
-  /> -->
+  
+  <TestimonialsSection
+  title="Testimonios"
+  subTitle="Lo que nuestros Clientes opinan de su Tienda Online en nuestra Plataforma EnElGaraje."
+  testimonials={[
+    {
+      content:
+        "Una magnífica opción para promover y vender mis productos. Desde que estoy EnElGaraje han crecido mis ingresos, he podido llevar un control de mis finanzas, de mis Gestores, de mis ventas en general. Mi Tienda tiene visibilidad desde cualquier parte del mundo, y no ha sido difícil el manejo por parte nuestra de todas las funcionalidades que tiene.",
+      author: "Yanelvis Ortiz Ortiz",
+      role: "Propietaria de DevMarket Solutions",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    },
+    // Agrega más testimonios aquí
+    
+    {
+      content:
+        "Excelente plataforma para gestionar mi tienda online. Muy fácil de usar y con un soporte increíble. Nos satisface la atención ante cualquier inquietud, la agilidad y amabilidad con el buen trato. Nuestro negocio ahora es mucho más rentable y próspero desde que estoy con EnElGaraje!",
+      author: "Abel Barrios Maleta",
+      role: "Presidente ViloTalleres Automotriz SURL",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    },
+  ]}
+/>
 
   <PricingSection pricing={pricing} />
 
@@ -141,4 +136,48 @@ const avatarSrcs: Array<string> = [
     subTitle="Empieza a crear tu tienda online con la App EnElGaraje y lleva tu negocio al siguiente nivel. Utiliza nuestra app y descubre lo fácil que es vender tus productos en línea."
     url="https://backoffice.enelgaraje.com/"
   />
+  <ContactSection />
+    
+  <!-- Botón flotante -->
+  <button
+    id="scroll-to-top"
+    class="fixed bottom-8 right-8 p-3 bg-[#ffba0a] text-white rounded-full shadow-lg hover:bg-[#e0a800] transition-colors duration-200 hidden"
+    aria-label="Volver al inicio"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 10l7-7m0 0l7 7m-7-7v18"
+      />
+    </svg>
+  </button>
+
+  <script>
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+  
+    if (scrollToTopButton) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollToTopButton.classList.remove("hidden");
+        } else {
+          scrollToTopButton.classList.add("hidden");
+        }
+      });
+  
+      scrollToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+  </script>
 </MainLayout>

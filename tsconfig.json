@@ -12,5 +12,12 @@
       "@styles/*": ["src/assets/styles/*"],
       "@utils/*": ["src/utils/*"]
     },
-  }
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["swiper"] 
+  },
+  "include": ["src/**/*", "glide.d.ts", "globals.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
