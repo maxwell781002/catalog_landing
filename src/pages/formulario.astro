@@ -85,9 +85,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
   <script>
     // Define la URL base de la API usando una variable de entorno
     
-    const API_BASE_URL = import.meta.env.PROD
-      ? "https://catalog-landing-nu.vercel.app/api" // URL de producción
-      : "http://localhost:3001/api"; // URL de desarrollo
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api";
 
     // Define la interfaz para el tipo de cliente
     interface Client {
