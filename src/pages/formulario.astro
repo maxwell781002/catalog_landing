@@ -89,7 +89,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
 
 async function loadWaitlist() {
   try {
-    const response = await fetch("http://localhost:3000/api/waitlist");
+    const response = await fetch("http://localhost:3001/api/waitlist");
     console.log("Respuesta del servidor:", response); // Depuración
     if (response.ok) {
       const result = await response.json(); // Cambia el nombre de la variable a `result`
