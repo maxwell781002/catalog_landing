@@ -12,13 +12,19 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Cargar variables de entorno
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+// Cargar variables de entorno solo en desarrollo local
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+}
 
 const app = express();
 
 // Habilitar CORS
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000", 
+  methods: ["GET", "POST"],
+  credentials: true, 
+}));
 
 // Configura body-parser para manejar solicitudes JSON y URL-encoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,10 +32,19 @@ app.use(bodyParser.json());
 
 // Configuración de la base de datos (PostgreSQL en Neon)
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Usar variable de entorno
+  connectionString: process.env.DATABASE_URL, 
   ssl: {
     rejectUnauthorized: false,
   },
+});
+
+// Prueba la conexión a la base de datos
+pool.query("SELECT NOW()", (err, res) => {
+  if (err) {
+    console.error("Error al conectar a la base de datos:", err);
+  } else {
+    console.log("Conexión a la base de datos exitosa:", res.rows[0]);
+  }
 });
 
 // Configuración de Nodemailer
@@ -37,14 +52,18 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     type: "OAuth2",
-    user: process.env.NODEMAILER_USER, // Usar variable de entorno
-    clientId: process.env.NODEMAILER_CLIENT_ID, // Usar variable de entorno
-    clientSecret: process.env.NODEMAILER_CLIENT_SECRET, // Usar variable de entorno
-    refreshToken: process.env.NODEMAILER_REFRESH_TOKEN, // Usar variable de entorno
+    user: process.env.NODEMAILER_USER, 
+    clientId: process.env.NODEMAILER_CLIENT_ID, 
+    clientSecret: process.env.NODEMAILER_CLIENT_SECRET, 
+    refreshToken: process.env.NODEMAILER_REFRESH_TOKEN, 
   },
 });
 
 // Ruta para manejar el formulario de lista de espera
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
 app.post("/api/waitlist", async (req, res) => {
   const { name, business, phone, email } = req.body;
 
@@ -61,8 +80,8 @@ app.post("/api/waitlist", async (req, res) => {
 
     // Enviar notificación por correo
     const mailOptions = {
-      from: process.env.NODEMAILER_USER, // Usar variable de entorno
-      to: process.env.NODEMAILER_DEST, // Usar variable de entorno
+      from: process.env.NODEMAILER_USER, 
+      to: process.env.NODEMAILER_DEST, 
       subject: "Nuevo cliente en la lista de espera",
       text: `Nombre: ${name}\nNegocio: ${business}\nTeléfono: ${phone}\nCorreo: ${email}`,
     };
@@ -72,12 +91,16 @@ app.post("/api/waitlist", async (req, res) => {
 
     res.status(200).json({ success: true, data: result.rows[0] });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error al insertar en la base de datos:", error);
     res.status(500).json({ success: false, error: "Error al procesar la solicitud" });
   }
 });
 
 // Ruta para obtener la lista de clientes en la lista de espera
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
 app.get("/api/waitlist", async (req, res) => {
   try {
     const result = await pool.query("SELECT business FROM waitlist");
@@ -90,13 +113,17 @@ app.get("/api/waitlist", async (req, res) => {
 });
 
 // Ruta para manejar el formulario de contacto
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
 app.post("/enviar-formulario", (req, res) => {
   const { nombre, apellido, email, telefono, detalles } = req.body;
 
   // Configura el correo electrónico
   const mailOptions = {
-    from: process.env.NODEMAILER_USER, // Usar variable de entorno
-    to: process.env.NODEMAILER_DEST, // Usar variable de entorno
+    from: process.env.NODEMAILER_USER, 
+    to: process.env.NODEMAILER_DEST, 
     subject: "Nuevo formulario de contacto",
     text: `
       Nombre: ${nombre}

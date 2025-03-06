@@ -83,38 +83,42 @@ import MainLayout from "@/layouts/MainLayout.astro";
 
   <!-- Script para manejar el envío del formulario y cargar la lista de clientes -->
   <script>
-  interface Client {
-  business: string;
-}
+    // Define la URL base de la API usando una variable de entorno
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
 
-async function loadWaitlist() {
-  try {
-    const response = await fetch("http://localhost:3001/api/waitlist");
-    console.log("Respuesta del servidor:", response); // Depuración
-    if (response.ok) {
-      const result = await response.json(); // Cambia el nombre de la variable a `result`
-      console.log("Datos recibidos:", result); // Depuración
-
-      const waitlistList = document.getElementById("waitlist-list");
-
-      if (waitlistList) {
-        // Accede a result.data, que es el array de clientes
-        waitlistList.innerHTML = result.data.map((client: Client) => `
-          <li class="dark:text-neutral-200">${client.business}</li>
-        `).join("");
-      } else {
-        console.error("El elemento 'waitlist-list' no fue encontrado en el DOM.");
-      }
-    } else {
-      console.error("Error al cargar la lista de espera");
+    // Define la interfaz para el tipo de cliente
+    interface Client {
+      business: string;
     }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
+ 
+    async function loadWaitlist() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/waitlist`);
+        console.log("Respuesta del servidor:", response); // Depuración
+        if (response.ok) {
+          const result = await response.json(); // Cambia el nombre de la variable a `result`
+          console.log("Datos recibidos:", result); // Depuración
 
-// Cargar la lista de clientes al cargar la página
-document.addEventListener("DOMContentLoaded", loadWaitlist);
+          const waitlistList = document.getElementById("waitlist-list");
+
+          if (waitlistList) {
+            // Accede a result.data, que es el array de clientes
+            waitlistList.innerHTML = result.data.map((client: Client) => `
+              <li class="dark:text-neutral-200">${client.business}</li>
+            `).join("");
+          } else {
+            console.error("El elemento 'waitlist-list' no fue encontrado en el DOM.");
+          }
+        } else {
+          console.error("Error al cargar la lista de espera");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    // Cargar la lista de clientes al cargar la página
+    document.addEventListener("DOMContentLoaded", loadWaitlist);
 
     // Obtén el formulario por su ID
     const form = document.getElementById("waitlist-form");
@@ -136,7 +140,7 @@ document.addEventListener("DOMContentLoaded", loadWaitlist);
 
         try {
           // Envía los datos a la API
-          const response = await fetch("http://localhost:3000/api/waitlist", {
+          const response = await fetch(`${API_BASE_URL}/api/waitlist`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

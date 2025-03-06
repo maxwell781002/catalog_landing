@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
+    "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -17,9 +18,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "types": ["swiper"],
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
+    "module": "ESNext", 
     "target": "ESNext",
-    "module": "ESNext",
     "jsx": "preserve",
     "jsxImportSource": "react",
     "forceConsistentCasingInFileNames": true,

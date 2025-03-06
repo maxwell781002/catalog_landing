@@ -2,8 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/**/*.astro",
+      "src": "src/api/server.js", 
+      "use": "@vercel/node"
+    },
+    {
+      "src": "src/**/*.astro",    
       "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",          
+      "dest": "src/api/server.js"
+    },
+    {
+      "src": "/(.*)",              
+      "dest": "/"
     }
   ],
   "headers": [

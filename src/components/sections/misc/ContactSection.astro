@@ -84,6 +84,7 @@ const formSubTitle: string = "Le responderemos dentro de 1 a 2 días hábiles, t
 
 <!-- Script para manejar el envío del formulario -->
 <script>
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
   const form = document.getElementById('contact-form');
   const notification = document.getElementById('notification');
   const notificationMessage = document.getElementById('notification-message');
@@ -115,12 +116,12 @@ const formSubTitle: string = "Le responderemos dentro de 1 a 2 días hábiles, t
         }, 5000);
         return; // Detiene el envío del formulario
       }
-
+ 
       const formData = new FormData(formElement); // Usar formElement en lugar de event.target
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch('http://localhost:3001/enviar-formulario', {
+        const response = await fetch(`${API_BASE_URL}/enviar-formulario`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
