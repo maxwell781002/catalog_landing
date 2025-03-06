@@ -85,7 +85,9 @@ import MainLayout from "@/layouts/MainLayout.astro";
   <script>
     // Define la URL base de la API usando una variable de entorno
     
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+    const API_BASE_URL = import.meta.env.PROD
+      ? "https://catalog-landing-nu.vercel.app/api" // URL de producción
+      : "http://localhost:3001/api"; // URL de desarrollo
 
     // Define la interfaz para el tipo de cliente
     interface Client {
@@ -94,7 +96,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
  
     async function loadWaitlist() {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/waitlist`);
+        const response = await fetch(`${API_BASE_URL}/waitlist`);
         console.log("Respuesta del servidor:", response); // Depuración
         if (response.ok) {
           const result = await response.json(); // Cambia el nombre de la variable a `result`
