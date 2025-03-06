@@ -21,7 +21,7 @@ const app = express();
 
 // Habilitar CORS
 app.use(cors({
-  origin: "http://localhost:3000", 
+  origin: process.env.VITE_API_BASE_URL || "http://localhost:3000", 
   methods: ["GET", "POST"],
   credentials: true, 
 }));
