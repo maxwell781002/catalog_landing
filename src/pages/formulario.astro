@@ -85,22 +85,25 @@ import MainLayout from "@/layouts/MainLayout.astro";
   <script>
     // Define la URL base de la API usando una variable de entorno
     
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api";
-
     // Define la interfaz para el tipo de cliente
     interface Client {
       business: string;
     }
  
-    async function loadWaitlist() {
-      try {
-        const response = await fetch(`${API_BASE_URL}/waitlist`);
-        console.log("Respuesta del servidor:", response); // Depuración
-        if (response.ok) {
-          const result = await response.json(); // Cambia el nombre de la variable a `result`
-          console.log("Datos recibidos:", result); // Depuración
+    const API_BASE_URL = import.meta.env.PROD
+  ? "https://catalog-landing-nu.vercel.app/api" // URL de producción
+  : "http://localhost:3001/api"; // URL de desarrollo
 
-          const waitlistList = document.getElementById("waitlist-list");
+async function loadWaitlist() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/waitlist`);
+    console.log("Respuesta del servidor:", response);
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log("Datos recibidos:", result);
+
+      const waitlistList = document.getElementById("waitlist-list");
 
           if (waitlistList) {
             // Accede a result.data, que es el array de clientes
@@ -119,74 +122,74 @@ import MainLayout from "@/layouts/MainLayout.astro";
     }
 
     // Cargar la lista de clientes al cargar la página
-    document.addEventListener("DOMContentLoaded", loadWaitlist);
+document.addEventListener("DOMContentLoaded", loadWaitlist);
 
-    // Obtén el formulario por su ID
-    const form = document.getElementById("waitlist-form");
+// Obtén el formulario por su ID
+const form = document.getElementById("waitlist-form");
 
-    // Verifica que el formulario exista antes de agregar el event listener
-    if (form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+// Verifica que el formulario exista antes de agregar el event listener
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
 
-        // Verifica que el target del evento sea un formulario válido
-        if (!e.target || !(e.target instanceof HTMLFormElement)) {
-          console.error("El formulario no es válido.");
-          return;
-        }
-
-        // Obtiene los datos del formulario
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries()); // Convierte los datos a un objeto
-
-        try {
-          // Envía los datos a la API
-          const response = await fetch(`${API_BASE_URL}/api/waitlist`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data), // Convierte los datos a JSON
-          });
-
-          // Obtiene el elemento del mensaje
-          const messageElement = document.getElementById("message");
-          if (!messageElement) {
-            console.error("El elemento del mensaje no fue encontrado.");
-            return;
-          }
-
-          if (response.ok) {
-            // Muestra un mensaje de éxito
-            messageElement.textContent = "¡Gracias por unirte a la lista de espera!";
-            messageElement.classList.remove("hidden");
-            messageElement.classList.add("text-green-600");
-
-            // Limpia el formulario
-            e.target.reset();
-
-            // Recarga la lista de clientes
-            loadWaitlist();
-          } else {
-            // Muestra un mensaje de error
-            messageElement.textContent = "Hubo un error al enviar el formulario. Inténtalo de nuevo.";
-            messageElement.classList.remove("hidden");
-            messageElement.classList.add("text-red-600");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-
-          // Muestra un mensaje de error en caso de excepción
-          const messageElement = document.getElementById("message");
-          if (messageElement) {
-            messageElement.textContent = "Hubo un error al enviar el formulario. Inténtalo de nuevo.";
-            messageElement.classList.remove("hidden");
-            messageElement.classList.add("text-red-600");
-          }
-        }
-      });
-    } else {
-      console.error("El formulario no fue encontrado.");
+    // Verifica que el target del evento sea un formulario válido
+    if (!e.target || !(e.target instanceof HTMLFormElement)) {
+      console.error("El formulario no es válido.");
+      return;
     }
+
+    // Obtiene los datos del formulario
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries()); // Convierte los datos a un objeto
+
+    try {
+      // Envía los datos a la API
+      const response = await fetch(`${API_BASE_URL}/waitlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // Convierte los datos a JSON
+      });
+
+      // Obtiene el elemento del mensaje
+      const messageElement = document.getElementById("message");
+      if (!messageElement) {
+        console.error("El elemento del mensaje no fue encontrado.");
+        return;
+      }
+
+      if (response.ok) {
+        // Muestra un mensaje de éxito
+        messageElement.textContent = "¡Gracias por unirte a la lista de espera!";
+        messageElement.classList.remove("hidden");
+        messageElement.classList.add("text-green-600");
+
+        // Limpia el formulario
+        e.target.reset();
+
+        // Recarga la lista de clientes
+        loadWaitlist();
+      } else {
+        // Muestra un mensaje de error
+        messageElement.textContent = "Hubo un error al enviar el formulario. Inténtalo de nuevo.";
+        messageElement.classList.remove("hidden");
+        messageElement.classList.add("text-red-600");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+
+      // Muestra un mensaje de error en caso de excepción
+      const messageElement = document.getElementById("message");
+      if (messageElement) {
+        messageElement.textContent = "Hubo un error al enviar el formulario. Inténtalo de nuevo.";
+        messageElement.classList.remove("hidden");
+        messageElement.classList.add("text-red-600");
+      }
+    }
+  });
+} else {
+  console.error("El formulario no fue encontrado.");
+}
   </script>
 </MainLayout>

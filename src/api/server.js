@@ -20,10 +20,21 @@ if (process.env.NODE_ENV !== "production") {
 const app = express();
 
 // Habilitar CORS
+const allowedOrigins = [
+  "http://localhost:3000", // Desarrollo local
+  "https://catalog-landing-nu.vercel.app", // Producción
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000", 
-  methods: ["GET", "POST"],
-  credentials: true, 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Origen no permitido por CORS"));
+    }
+  },
+  methods: ["GET", "POST"], // Métodos permitidos
+  credentials: true, // Permite enviar cookies y encabezados de autenticación
 }));
 
 // Configura body-parser para manejar solicitudes JSON y URL-encoded
@@ -32,7 +43,7 @@ app.use(bodyParser.json());
 
 // Configuración de la base de datos (PostgreSQL en Neon)
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, 
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -52,18 +63,14 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     type: "OAuth2",
-    user: process.env.NODEMAILER_USER, 
-    clientId: process.env.NODEMAILER_CLIENT_ID, 
-    clientSecret: process.env.NODEMAILER_CLIENT_SECRET, 
-    refreshToken: process.env.NODEMAILER_REFRESH_TOKEN, 
+    user: process.env.NODEMAILER_USER,
+    clientId: process.env.NODEMAILER_CLIENT_ID,
+    clientSecret: process.env.NODEMAILER_CLIENT_SECRET,
+    refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
   },
 });
 
 // Ruta para manejar el formulario de lista de espera
-/**
- * @param {import("express").Request} req
- * @param {import("express").Response} res
- */
 app.post("/api/waitlist", async (req, res) => {
   const { name, business, phone, email } = req.body;
 
@@ -80,8 +87,8 @@ app.post("/api/waitlist", async (req, res) => {
 
     // Enviar notificación por correo
     const mailOptions = {
-      from: process.env.NODEMAILER_USER, 
-      to: process.env.NODEMAILER_DEST, 
+      from: process.env.NODEMAILER_USER,
+      to: process.env.NODEMAILER_DEST,
       subject: "Nuevo cliente en la lista de espera",
       text: `Nombre: ${name}\nNegocio: ${business}\nTeléfono: ${phone}\nCorreo: ${email}`,
     };
@@ -97,10 +104,6 @@ app.post("/api/waitlist", async (req, res) => {
 });
 
 // Ruta para obtener la lista de clientes en la lista de espera
-/**
- * @param {import("express").Request} req
- * @param {import("express").Response} res
- */
 app.get("/api/waitlist", async (req, res) => {
   try {
     const result = await pool.query("SELECT business FROM waitlist");
@@ -110,39 +113,6 @@ app.get("/api/waitlist", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ success: false, error: "Error al obtener la lista de espera" });
   }
-});
-
-// Ruta para manejar el formulario de contacto
-/**
- * @param {import("express").Request} req
- * @param {import("express").Response} res
- */
-app.post("/enviar-formulario", (req, res) => {
-  const { nombre, apellido, email, telefono, detalles } = req.body;
-
-  // Configura el correo electrónico
-  const mailOptions = {
-    from: process.env.NODEMAILER_USER, 
-    to: process.env.NODEMAILER_DEST, 
-    subject: "Nuevo formulario de contacto",
-    text: `
-      Nombre: ${nombre}
-      Apellido: ${apellido}
-      Email: ${email}
-      Teléfono: ${telefono}
-      Detalles: ${detalles}
-    `,
-  };
-
-  // Envía el correo
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: "Error al enviar el correo" });
-    }
-    console.log("Correo enviado: " + info.response);
-    res.status(200).json({ success: true, message: "Correo enviado correctamente" });
-  });
 });
 
 // Iniciar el servidor
