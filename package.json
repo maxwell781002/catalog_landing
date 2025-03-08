@@ -1,7 +1,7 @@
 {
   "name": "landingpage",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "npm@12.5.2",
   "scripts": {
     "dev": "astro dev",
@@ -72,18 +72,18 @@
     "version": 2,
     "builds": [
       {
-        "src": "src/api/server.js",
+        "src": "pages/api/server.js",
         "use": "@vercel/node"
       },
       {
-        "src": "src/**/*.astro",
+        "src": "**/*.astro",
         "use": "@vercel/static"
       }
     ],
     "routes": [
       {
         "src": "/api/(.*)",
-        "dest": "src/api/server.js"
+        "dest": "/pages/api/server.js"
       },
       {
         "src": "/(.*)",
