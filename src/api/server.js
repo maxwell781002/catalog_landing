@@ -22,7 +22,7 @@ const app = express();
 // Habilitar CORS
 const allowedOrigins = [
   "http://localhost:3000", // Desarrollo local
-  "https://catalog-landing-five.vercel.app/", // Producción
+  "https://catalog-landing-five.vercel.app", // Producción
 ];
 
 app.use(cors({
