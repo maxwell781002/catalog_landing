@@ -92,7 +92,7 @@ app.post("/api/waitlist", async (req, res) => {
       subject: "Nuevo cliente en la lista de espera",
       text: `Nombre: ${name}\nNegocio: ${business}\nTeléfono: ${phone}\nCorreo: ${email}`,
     };
-
+ 
     await transporter.sendMail(mailOptions);
     console.log("Correo enviado correctamente");
 
