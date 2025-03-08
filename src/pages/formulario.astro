@@ -91,9 +91,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
     }
  
     // Define la URL base de la API
-    const API_BASE_URL = import.meta.env.PROD
-  ? "https://catalog-landing-five.vercel.app/api" // URL de producción
-  : "http://localhost:3001/api"; // URL de desarrollo
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api";
 
 async function loadWaitlist() {
   try {
