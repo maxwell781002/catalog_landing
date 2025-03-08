@@ -90,6 +90,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
       business: string;
     }
  
+    // Define la URL base de la API
     const API_BASE_URL = import.meta.env.PROD
   ? "https://catalog-landing-nu.vercel.app/api" // URL de producción
   : "http://localhost:3001/api"; // URL de desarrollo

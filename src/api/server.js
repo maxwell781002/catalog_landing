@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 
 // Configuración de la base de datos (PostgreSQL en Neon)
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL || process.env.DATABASE_URL_UNPOOLED, // Usa DATABASE_URL o DATABASE_URL_UNPOOLED
   ssl: {
     rejectUnauthorized: false,
   },
