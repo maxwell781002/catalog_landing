@@ -3,13 +3,19 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import compressor from "astro-compressor";
 import starlight from "@astrojs/starlight";
- 
+
+import vercel from "@astrojs/vercel";
+import vercel from '@astrojs/vercel/serverless';
+
 export default defineConfig({
   site: "https://screwfast.uk",
+
   image: {
     domains: ["images.unsplash.com"],
   },
+
   prefetch: true,
+
   integrations: [
     tailwind(),
     sitemap({
@@ -100,8 +106,12 @@ export default defineConfig({
       brotli: true,
     }),
   ],
-  output: "static",
+
+  output: "server",
+
   server: {
     port: 3000,
   },
+
+  adapter: vercel(),
 });

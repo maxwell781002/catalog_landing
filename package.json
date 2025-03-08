@@ -21,6 +21,7 @@
     "@astrojs/starlight": "^0.32.2",
     "@astrojs/starlight-tailwind": "^2.0.3",
     "@astrojs/tailwind": "^5.1.1",
+    "@astrojs/vercel": "^8.1.1",
     "@glidejs/glide": "^3.7.1",
     "@preline/accordion": "^2.5.0",
     "@preline/collapse": "^2.5.0",
@@ -71,21 +72,21 @@
     "version": 2,
     "builds": [
       {
-        "src": "src/api/server.js", 
+        "src": "src/api/server.js",
         "use": "@vercel/node"
       },
       {
-        "src": "src/**/*.astro", 
+        "src": "src/**/*.astro",
         "use": "@vercel/static"
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)", 
+        "src": "/api/(.*)",
         "dest": "src/api/server.js"
       },
       {
-        "src": "/(.*)", 
+        "src": "/(.*)",
         "dest": "/index.html"
       }
     ]
